@@ -5,18 +5,14 @@ import styles from '../styles/Home.module.css'
 import NavBar from '../components/NavBar';
 import Seo from '../components/Head';
 
-const API_KEY = '93ce95726e9afcb5344dbaddb4ab1913';
-
 export default function Home() {
-  const [ movies, setMovies ] = useState();
-
+  const [movies, setMovies] = useState();
   useEffect(() => {
-    ( async () => {
-      const { results } = await (await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)).json();
-      console.log('results :' ,results)
-      setMovies( results );
+    (async () => {
+      const { results } = await (await fetch(`/api/movies`)).json();
+      setMovies(results);
     })();
-  }, [])
+  }, []);
   return (
     <div className="container">
       <Seo title="Home" />
@@ -49,5 +45,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
 }
